@@ -12,14 +12,16 @@
 		"mocha": "*",
 		"npm-build-tools": "*",
 		"tsd": "*",
-		"typescript": "*"
+		"typescript": "*",
+    "watch": "*"
 	},
 	"main": "index.js",
 	"scripts": {
 		"build": "build",
-		"clean": "n-clean artifacts && n-clean test-artifacts",
+		"clean": "n-clean artifacts && n-clean dist && n-clean test-artifacts",
 		"setup": "setup",
 		"pretest": "tsc --project test",
-		"test": "mocha test-artifacts/test"
+		"test": "mocha test-artifacts/test",
+    "watch": "watch \"npm run build && npm run test\" lib test"
 	}
 }
