@@ -1,8 +1,8 @@
 var RestBuilderOptions = (function () {
     function RestBuilderOptions() {
+        this.api = true;
     }
     return RestBuilderOptions;
 })();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = RestBuilderOptions;
+exports.RestBuilderOptions = RestBuilderOptions;
 //# sourceMappingURL=RestBuilderOptions.js.map

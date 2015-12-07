@@ -1,3 +1,3 @@
-export default class RestBuilderOptions {
-    constructor();
+export declare class RestBuilderOptions {
+    api: boolean;
 }

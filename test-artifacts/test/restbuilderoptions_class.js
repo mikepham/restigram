@@ -1,11 +1,11 @@
 /// <reference path="../typings/chai/chai.d.ts" />
 /// <reference path="../typings/mocha/mocha.d.ts" />
 var chai_1 = require("chai");
-var RestBuilder_1 = require("../lib/RestBuilder");
 var RestBuilderOptions_1 = require("../lib/RestBuilderOptions");
-describe("RestBuilder", function () {
+describe("RestBuilderOptions", function () {
     it("should create instance", function () {
-        chai_1.expect(new RestBuilder_1.RestBuilder(new RestBuilderOptions_1.RestBuilderOptions())).not.undefined;
+        var options = new RestBuilderOptions_1.RestBuilderOptions();
+        chai_1.expect(options.api).equal(true);
     });
 });
-//# sourceMappingURL=restbuilder_class.js.map
+//# sourceMappingURL=restbuilderoptions_class.js.map

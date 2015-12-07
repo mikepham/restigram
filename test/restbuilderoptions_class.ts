@@ -2,13 +2,13 @@
 /// <reference path="../typings/mocha/mocha.d.ts" />
 
 import {expect} from "chai";
-import {RestBuilder} from "../lib/RestBuilder";
 import {RestBuilderOptions} from "../lib/RestBuilderOptions";
 
-describe("RestBuilder", () => {
+describe("RestBuilderOptions", () => {
 
-  it("should create instance", () => {
-    expect(new RestBuilder(new RestBuilderOptions())).not.undefined;
-  });
+	it("should create instance", () => {
+		let options = new RestBuilderOptions();
+		expect(options.api).equal(true);
+	});
 
 });

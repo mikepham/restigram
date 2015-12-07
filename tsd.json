@@ -16,6 +16,12 @@
 		},
 		"should/should.d.ts": {
 			"commit": "c3ab375b371b7b4204adee3b1209baecd81cec02"
+		},
+		"assert/assert.d.ts": {
+			"commit": "c3ab375b371b7b4204adee3b1209baecd81cec02"
+		},
+		"chai/chai.d.ts": {
+			"commit": "c3ab375b371b7b4204adee3b1209baecd81cec02"
 		}
 	}
 }

@@ -1,9 +1,13 @@
-import RestBuilderOptions from "./RestBuilderOptions";
+import {RestBuilderOptions} from "./RestBuilderOptions";
 
-export default class RestBuilder {
-	private options: RestBuilderOptions;
+export class RestBuilder {
+  private options: RestBuilderOptions;
 
-	constructor(options: RestBuilderOptions) {
-		this.options = options;
-	}
+	/**
+	 * Initializes a new instance of {RestBuilder}.
+	 * @param {RestBuilderOptions} set of options to use when generating the API
+	 */
+  constructor(options: RestBuilderOptions) {
+    this.options = options;
+  }
 }

@@ -5,7 +5,7 @@
   "showOutput": "silent",
   "tasks": [
     {
-      "taskName": "Build",
+      "taskName": "build",
       "args": [
         "npm",
         "run",
@@ -14,7 +14,7 @@
       "suppressTaskName": true
     },
     {
-      "taskName": "Publish",
+      "taskName": "publish",
       "args": [
         "npm",
         "run",

@@ -8,15 +8,16 @@
 		"superagent": "^1.5.0"
 	},
 	"devDependencies": {
+		"chai": "*",
 		"mocha": "*",
 		"npm-build-tools": "*",
-		"should": "*",
 		"tsd": "*",
 		"typescript": "*"
 	},
 	"main": "index.js",
 	"scripts": {
 		"build": "build",
+		"clean": "n-clean artifacts && n-clean test-artifacts",
 		"setup": "setup",
 		"pretest": "tsc --project test",
 		"test": "mocha test-artifacts/test"
