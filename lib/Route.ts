@@ -85,9 +85,24 @@ export class Route {
   }
 
   /**
+   * Returns an object that represents a request to the route.
+   * @param {any} context - a context object to use when walking source strings
+   */
+  public createRequest(context?: any, includeOptionals?: boolean): any {
+    let request: any = {};
+    this.request().forEach(param => {
+      let included = param.optional && !includeOptionals ? false : true;
+      if (included) {
+        request[param.name] = param.resolve(context)
+      }
+    });
+    return request;
+  }
+
+  /**
    * Returns a URL that has been parsed and replaced with values.
    */
-  public buildUrl(): string {
+  public createUrl(): string {
     return this._url;
   }
 

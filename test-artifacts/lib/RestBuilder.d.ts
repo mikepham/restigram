@@ -19,6 +19,3 @@ export declare class RestBuilder {
     add(route: Route): void;
     private build(route);
 }
-export interface IRouteExecutor {
-    route: Route;
-}

@@ -4,11 +4,13 @@ var RouteParam = (function () {
      * @constructor
      * @param {string} name - name to use for the parameter
      * @param {RouteParamKind} kind - determines how the parameter is used
-     * @param {string} source - string to parse to get parameter value at runtime.
+     * @param {boolean} optional - determines whether the parameter is optional
+     * @param {string} source - string to parse to get parameter value at runtime
      * @param {string} type - string type of the parameter value
      */
-    function RouteParam(name, kind, source, type) {
+    function RouteParam(name, kind, optional, source, type) {
         this._kind = kind;
+        this._optional = optional;
         this._name = name;
         this._source = source;
         this._type = type;
@@ -19,6 +21,16 @@ var RouteParam = (function () {
          */
         get: function () {
             return this._kind;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouteParam.prototype, "optional", {
+        /**
+         * Gets a value indicating whether the parameter is optional.
+         */
+        get: function () {
+            return this._optional;
         },
         enumerable: true,
         configurable: true

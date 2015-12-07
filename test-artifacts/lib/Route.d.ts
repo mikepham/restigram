@@ -49,9 +49,14 @@ export declare class Route {
      */
     url: string;
     /**
+     * Returns an object that represents a request to the route.
+     * @param {any} context - a context object to use when walking source strings
+     */
+    createRequest(context?: any, includeOptionals?: boolean): any;
+    /**
      * Returns a URL that has been parsed and replaced with values.
      */
-    buildUrl(): string;
+    createUrl(): string;
     /**
      * Gets the collection of header parameters.
      */

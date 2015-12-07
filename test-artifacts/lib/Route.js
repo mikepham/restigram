@@ -94,9 +94,23 @@ var Route = (function () {
         configurable: true
     });
     /**
+     * Returns an object that represents a request to the route.
+     * @param {any} context - a context object to use when walking source strings
+     */
+    Route.prototype.createRequest = function (context, includeOptionals) {
+        var request = {};
+        this.request().forEach(function (param) {
+            var included = param.optional && !includeOptionals ? false : true;
+            if (included) {
+                request[param.name] = param.resolve(context);
+            }
+        });
+        return request;
+    };
+    /**
      * Returns a URL that has been parsed and replaced with values.
      */
-    Route.prototype.buildUrl = function () {
+    Route.prototype.createUrl = function () {
         return this._url;
     };
     /**

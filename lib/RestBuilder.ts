@@ -32,7 +32,3 @@ export class RestBuilder {
   private build(route: Route): void {
   }
 }
-
-export interface IRouteExecutor {
-  route: Route;
-}
