@@ -1,0 +1,26 @@
+{
+  "version": "0.1.0",
+  "command": "powershell",
+  "isShellCommand": true,
+  "showOutput": "silent",
+  "tasks": [
+    {
+      "taskName": "Build",
+      "args": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "suppressTaskName": true
+    },
+    {
+      "taskName": "Publish",
+      "args": [
+        "npm",
+        "run",
+        "publish"
+      ],
+      "suppressTaskName": true
+    }
+  ]
+}

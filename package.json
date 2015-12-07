@@ -1,0 +1,24 @@
+{
+	"name": "restigram",
+	"author": "NativeCode Development",
+	"description": "REST client framework",
+	"license": "ISC",
+	"version": "1.0.0",
+	"dependencies": {
+		"superagent": "^1.5.0"
+	},
+	"devDependencies": {
+		"mocha": "*",
+		"npm-build-tools": "*",
+		"should": "*",
+		"tsd": "*",
+		"typescript": "*"
+	},
+	"main": "index.js",
+	"scripts": {
+		"build": "build",
+		"setup": "setup",
+		"pretest": "tsc --project test",
+		"test": "mocha test-artifacts/test"
+	}
+}

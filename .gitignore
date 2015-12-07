@@ -1,0 +1,5 @@
+# Ignore directories
+artifacts
+dist
+node_modules
+typings
