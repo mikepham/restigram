@@ -5,7 +5,7 @@ import {expect} from "chai";
 
 import {RestServiceOptions} from "../lib/RestServiceOptions";
 
-describe("RestServiceOptions", () => {
+describe("When using the RestServiceOptions...", () => {
 
   let options: RestServiceOptions;
 

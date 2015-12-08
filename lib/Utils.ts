@@ -10,13 +10,13 @@ export module Utils {
 
   export function expand(message: string, params: Object): string {
     return message.replace(/{(\w+)}/igm, (match, key) => {
-      return params[key];
+      return params[key] || "";
     });
   }
 
   export function format(message: string, values: string[]): string {
     return message.replace(/{(\d+)}/gm, (match, index) => {
-      return values[index];
+      return values[index] || "";
     });
   }
 

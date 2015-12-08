@@ -9,7 +9,7 @@ import {Route} from "../lib/Route";
 import {RouteInfo} from "../lib/RouteInfo";
 import {RouteMethod} from "../lib/RouteMethod";
 
-describe("RestServiceBuilder", () => {
+describe("When using the RestServiceBuilder class...", () => {
 
   let builder;
 

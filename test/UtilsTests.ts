@@ -5,25 +5,12 @@ import {expect} from "chai";
 
 import {Utils} from "../lib/Utils";
 
-describe("Utils", () => {
+describe("When using the Utils module...", () => {
 
-  describe("contains", () => {
-
-    let testable: string[] = ["apples", "bananas", "mangos", "oranges"];
-
-    it("should return false when value in array", () => {
-      expect(Utils.contains(testable, "tomato")).false;
-    });
-
-    it("should return true when value in array", () => {
-      expect(Utils.contains(testable, "mangos")).true;
-    });
-
-  });
-
-  describe("string functions", () => {
+  describe("..and calling string functions...", () => {
 
     let expected = "The quick brown fox jumped over the fence.";
+    let expectedEmpty = "The    jumped over the .";
     let expectedMultiple = "The quick brown fox jumped over the fox.";
 
     describe("expand", () => {
@@ -48,6 +35,11 @@ describe("Utils", () => {
         expect(actual).equals(expectedMultiple)
       });
 
+      it("should expand string with empty values when keys not found", () => {
+        let actual = Utils.expand(single, {});
+        expect(actual).equals(expectedEmpty);
+      });
+
     });
 
     describe("format", () => {
@@ -66,6 +58,25 @@ describe("Utils", () => {
         expect(actual).equals(expectedMultiple);
       });
 
+      it("should format string with empty values when indices not found", () => {
+        let actual = Utils.format(single, []);
+        expect(actual).equals(expectedEmpty);
+      });
+
+    });
+
+  });
+
+  describe("contains", () => {
+
+    let testable: string[] = ["apples", "bananas", "mangos", "oranges"];
+
+    it("should return false when value in array", () => {
+      expect(Utils.contains(testable, "tomato")).false;
+    });
+
+    it("should return true when value in array", () => {
+      expect(Utils.contains(testable, "mangos")).true;
     });
 
   });

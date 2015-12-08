@@ -7,7 +7,7 @@ import {RestService} from "../lib/RestService";
 import {RestServiceBuilder} from "../lib/RestServiceBuilder";
 import {RestServiceOptions} from "../lib/RestServiceOptions";
 
-describe("RestService", () => {
+describe("When using the RestService class...", () => {
 
   let service: RestService;
   let builder: RestServiceBuilder;

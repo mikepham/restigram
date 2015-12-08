@@ -7,7 +7,7 @@ import {RouteParam} from "../lib/RouteParam";
 import {RouteParamInfo} from "../lib/RouteParamInfo";
 import {RouteParamKind} from "../lib/RouteParamKind";
 
-describe("RouteParam", () => {
+describe("When using the RouteParam class...", () => {
 
   it("should create instance", () => {
     let info = new RouteParamInfo();
