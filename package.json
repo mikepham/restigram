@@ -1,27 +1,32 @@
 {
-	"name": "restigram",
-	"author": "NativeCode Development",
-	"description": "REST client framework",
-	"license": "ISC",
-	"version": "1.0.0",
-	"dependencies": {
-		"superagent": "^1.5.0"
-	},
-	"devDependencies": {
-		"chai": "*",
-		"mocha": "*",
-		"npm-build-tools": "*",
-		"tsd": "*",
-		"typescript": "*",
+  "name": "restigram",
+  "author": "NativeCode Development",
+  "description": "REST client framework",
+  "license": "ISC",
+  "version": "1.0.0",
+  "dependencies": {
+    "bluebird": "^3.0.6",
+    "extend": "^3.0.0",
+    "superagent": "^1.5.0",
+    "urijs": "^1.17.0"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "jsdoc": "*",
+    "mocha": "*",
+    "npm-build-tools": "*",
+    "tsd": "*",
+    "tslint": "*",
+    "typescript": "*",
     "watch": "*"
-	},
-	"main": "index.js",
-	"scripts": {
-		"build": "build",
-		"clean": "n-clean artifacts && n-clean dist && n-clean test-artifacts",
-		"setup": "setup",
-		"pretest": "tsc --project test",
-		"test": "mocha test-artifacts/test",
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "build",
+    "clean": "n-clean artifacts && n-clean dist && n-clean test-artifacts",
+    "setup": "setup",
+    "pretest": "tsc --project test",
+    "test": "mocha test-artifacts/test",
     "watch": "watch \"npm run build && npm run test\" lib test"
-	}
+  }
 }
