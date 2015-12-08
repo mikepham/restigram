@@ -1,9 +1,18 @@
+/// <reference path="../typings/urijs/urijs.d.ts" />
+
+import {} from "urijs";
+import {} from "./Utils";
+
+import {RouteAuth} from "./RouteAuth";
+import {RouteInfo} from "./RouteInfo";
 import {RouteMethod} from "./RouteMethod";
 import {RouteParam} from "./RouteParam";
+import {RouteParamCollection} from "./RouteParamCollection";
 import {RouteParamKind} from "./RouteParamKind";
 import {RouteParamNotFound} from "./exceptions/RouteParamNotFound";
 
 export class Route {
+  private _auth: RouteAuth;
   private _group: string;
   private _id: string;
   private _method: RouteMethod;
@@ -12,43 +21,52 @@ export class Route {
   private _path: string;
   private _url: string;
 
-  constructor(id: string, path: string, method: RouteMethod = RouteMethod.Default, params?: RouteParam[], group?: string, name?: string, url?: string) {
-    this._group = group;
-    this._id = id;
-    this._method = method;
-    this._name = name;
+  public constructor(info: RouteInfo, params?: RouteParam[]) {
+    this._auth = info.auth;
+    this._group = info.group;
+    this._id = info.id;
+    this._method = info.method;
+    this._name = info.name;
     this._params = params;
-    this._path = path;
-    this._url = url;
+    this._path = info.path;
+    this._url = info.url;
   }
 
-  get group(): string {
+  public get auth(): RouteAuth {
+    return this._auth;
+  }
+
+  public set auth(auth: RouteAuth) {
+    this._auth = auth;
+  }
+
+  public get group(): string {
     return this._group;
   }
 
-  get id(): string {
+  public get id(): string {
     return this._id;
   }
 
-  get method(): RouteMethod {
+  public get method(): RouteMethod {
     return this._method;
   }
 
-  get name(): string {
+  public get name(): string {
     return this._name || this._id;
   }
 
-  get params(): string[] {
+  public get params(): string[] {
     let names: string[] = [];
     this._params.forEach(x => names.push(x.name));
     return names;
   }
 
-  get path(): string {
+  public get path(): string {
     return this._path;
   }
 
-  get url(): string {
+  public get url(): string {
     return this._url;
   }
 
@@ -72,6 +90,7 @@ export class Route {
   }
 
   public createUrl(query?: Object, url?: Object): string {
+    let variables = Utils.variables(this.url);
     return this._url;
   }
 
@@ -113,6 +132,22 @@ export class Route {
       }
     });
     return params;
+  }
+
+  public static load(instance: RouteInfo): Route {
+    return new Route(instance);
+  }
+
+  public static save(route: Route): RouteInfo {
+    let info = new RouteInfo();
+    info.auth = route._auth;
+    info.group = route._group;
+    info.id = route._id;
+    info.method = route._method;
+    info.name = route._name;
+    info.path = route._path;
+    info.url = route._url;
+    return info;
   }
 
   public variables(): RouteParam[] {

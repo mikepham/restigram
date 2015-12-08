@@ -6,15 +6,15 @@ export class RestServiceBuilder {
   private _options: RestServiceOptions;
   private _routes: Route[] = [];
 
-  constructor(options: RestServiceOptions) {
+  public constructor(options: RestServiceOptions) {
     this._options = options;
   }
 
-  get count(): number {
+  public get count(): number {
     return this._routes.length;
   }
 
-  get options(): RestServiceOptions {
+  public get options(): RestServiceOptions {
     return this._options;
   }
 

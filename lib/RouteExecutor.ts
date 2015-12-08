@@ -6,7 +6,7 @@ import extend = require("extend");
 import superagent = require("superagent");
 
 import {} from "bluebird";
-import {Request, Response} from "superagent";
+import {SuperAgentRequest, Request, Response} from "superagent";
 import {Route} from "./Route";
 import {RouteMethod} from "./RouteMethod";
 import {InvalidExecutorMethod} from "./exceptions/InvalidExecutorMethod";
@@ -19,10 +19,10 @@ export interface RouteExecutor {
 export class DefaultRouteExecutor implements RouteExecutor {
   private _route: Route;
 
-  constructor(route: Route) {
+  public constructor(route: Route) {
   }
 
-  get route(): Route {
+  public get route(): Route {
     return this._route;
   }
 
@@ -31,26 +31,21 @@ export class DefaultRouteExecutor implements RouteExecutor {
       throw new InvalidExecutorMethod(this.route.id, this.route.method);
     }
 
-    let request_data = extend(true, {}, request, this.route.createRequest());
-    let request_headers = extend(true, {}, headers, this.route.createHeaders());
+    let request_data: Object = extend(true, {}, request, this.route.createRequest());
+    let request_headers: Object = extend(true, {}, headers, this.route.createHeaders());
 
-    let method = RouteMethod[this.route.method];
-    let url = this.route.createUrl(values.query, values.url);
-    let http = superagent(method, url);
+    let method: string = RouteMethod[this.route.method];
+    let url: string = this.route.createUrl(values.query, values.url);
+    let http: SuperAgentRequest = superagent(method, url);
 
     if (request_data) {
       http.send(request_data);
     }
 
-    for (let header in request_headers) {
-      let value = request_headers[header];
-      if (value) {
-        http.set(header, value);
-      }
-    }
+    this.setHeaders(http, headers);
 
     return new Promise<Response>((resolve, reject) => {
-      return http.end((error, response) => {
+      return http.end((error: Error, response: Response) => {
         if (error) {
           reject(error);
         } else {
@@ -58,5 +53,21 @@ export class DefaultRouteExecutor implements RouteExecutor {
         }
       });
     });
+  }
+
+  protected setHeaders(http: SuperAgentRequest, headers: Object) {
+    for (let header in headers) {
+      let value: string = headers[header];
+
+      if (value) {
+        if (header.toLowerCase() === "content-type") {
+          // BUG: Fixes a bug in browsers where the content-type is sent
+          // twice, i.e. "application/json, application/json".
+          http.type(value);
+        } else {
+          http.set(header, value);
+        }
+      }
+    }
   }
 }

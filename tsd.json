@@ -6,28 +6,31 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "bluebird/bluebird.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
     },
     "chai/chai.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
     },
     "extend/extend.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
     },
     "mocha/mocha.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
     },
     "node/node.d.ts": {
       "commit": "c3ab375b371b7b4204adee3b1209baecd81cec02"
     },
     "superagent/superagent.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
     },
     "urijs/URIjs.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
     },
     "watch/watch.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
     }
   }
 }

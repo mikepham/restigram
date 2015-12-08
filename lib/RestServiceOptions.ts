@@ -1,4 +1,9 @@
+import {RouteAuth} from "./RouteAuth";
+
 export class RestServiceOptions {
-  constructor() {
+  public alwaysIncludeEmptyRequestParams: boolean = false;
+  public defaultRouteAuthentication: RouteAuth = RouteAuth.None;
+
+  public constructor() {
   }
 }
