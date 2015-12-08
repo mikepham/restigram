@@ -1,16 +1,16 @@
 {
-	"compilerOptions": {
-		"declaration": true,
-		"diagnostics": true,
-		"module": "commonjs",
-		"outDir": "../test-artifacts",
-		"sourceMap": true,
-		"target": "ES5"
-	},
-	"exclude": [
-		"../dist",
-		"../lib",
-		"../node_modules",
-		"../typings"
-	]
+  "compilerOptions": {
+    "declaration": true,
+    "diagnostics": true,
+    "module": "commonjs",
+    "outDir": "../test-artifacts",
+    "sourceMap": true,
+    "target": "ES5"
+  },
+  "exclude": [
+    "../dist",
+    "../lib",
+    "../node_modules",
+    "../typings"
+  ]
 }

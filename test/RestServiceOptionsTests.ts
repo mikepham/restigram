@@ -12,8 +12,8 @@ describe("RestServiceOptions", () => {
     options = new RestServiceOptions();
   });
 
-	it("should create instance", () => {
-		expect(options).instanceof(RestServiceOptions);
-	});
+  it("should create instance", () => {
+    expect(options).instanceof(RestServiceOptions);
+  });
 
 });

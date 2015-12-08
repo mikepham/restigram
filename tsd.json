@@ -1,39 +1,33 @@
 {
-	"version": "v4",
-	"repo": "borisyankov/DefinitelyTyped",
-	"ref": "master",
-	"path": "typings",
-	"bundle": "typings/tsd.d.ts",
-	"installed": {
-		"superagent/superagent.d.ts": {
-			"commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
-		},
-		"node/node.d.ts": {
-			"commit": "c3ab375b371b7b4204adee3b1209baecd81cec02"
-		},
-		"mocha/mocha.d.ts": {
-			"commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
-		},
-		"should/should.d.ts": {
-			"commit": "c3ab375b371b7b4204adee3b1209baecd81cec02"
-		},
-		"assert/assert.d.ts": {
-			"commit": "c3ab375b371b7b4204adee3b1209baecd81cec02"
-		},
-		"chai/chai.d.ts": {
-			"commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
-		},
-		"watch/watch.d.ts": {
-			"commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
-		},
-		"urijs/URIjs.d.ts": {
-			"commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
-		},
-		"bluebird/bluebird.d.ts": {
-			"commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
-		},
-		"extend/extend.d.ts": {
-			"commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
-		}
-	}
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "bluebird/bluebird.d.ts": {
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+    },
+    "chai/chai.d.ts": {
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+    },
+    "extend/extend.d.ts": {
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+    },
+    "mocha/mocha.d.ts": {
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+    },
+    "node/node.d.ts": {
+      "commit": "c3ab375b371b7b4204adee3b1209baecd81cec02"
+    },
+    "superagent/superagent.d.ts": {
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+    },
+    "urijs/URIjs.d.ts": {
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+    },
+    "watch/watch.d.ts": {
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+    }
+  }
 }

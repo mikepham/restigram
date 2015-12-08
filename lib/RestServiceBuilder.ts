@@ -22,7 +22,7 @@ export class RestServiceBuilder {
     this._routes.push(route);
     return this;
   }
-  
+
   public build(): Object {
     let api = {};
     this._routes.forEach(route => {
