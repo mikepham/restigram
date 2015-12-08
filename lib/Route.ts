@@ -1,7 +1,6 @@
 /// <reference path="../typings/urijs/urijs.d.ts" />
 
 import {} from "urijs";
-import {} from "./Utils";
 
 import {RouteAuth} from "./RouteAuth";
 import {RouteInfo} from "./RouteInfo";
@@ -10,6 +9,7 @@ import {RouteParam} from "./RouteParam";
 import {RouteParamCollection} from "./RouteParamCollection";
 import {RouteParamKind} from "./RouteParamKind";
 import {RouteParamNotFound} from "./exceptions/RouteParamNotFound";
+import {Utils} from "./Utils";
 
 export class Route {
   private _auth: RouteAuth;
@@ -70,70 +70,6 @@ export class Route {
     return this._url;
   }
 
-  public createHeaders(context?: Object): Object {
-    let headers: Object = {};
-    this.headers().forEach(header => {
-      headers[header.name] = header.resolve(context);
-    });
-    return headers;
-  }
-
-  public createRequest(context?: Object, includeOptionals?: boolean): Object {
-    let request: Object = {};
-    this.request().forEach(param => {
-      let included = param.optional && !includeOptionals ? false : true;
-      if (included) {
-        request[param.name] = param.resolve(context);
-      }
-    });
-    return request;
-  }
-
-  public createUrl(query?: Object, url?: Object): string {
-    let variables = Utils.variables(this.url);
-    return this._url;
-  }
-
-  public headers(): RouteParam[] {
-    let params: RouteParam[] = [];
-    this._params.forEach(param => {
-      if (param.kind === RouteParamKind.Header) {
-        params.push(param);
-      }
-    });
-    return params;
-  }
-
-  public param(name: string): RouteParam {
-    for (let index = 0; index < this._params.length; index++) {
-      let param = this._params[index];
-      if (param.name === name) {
-        return param;
-      }
-    }
-    throw new RouteParamNotFound(name);
-  }
-
-  public query(): RouteParam[] {
-    let params: RouteParam[] = [];
-    this._params.forEach(param => {
-      if (param.kind === RouteParamKind.Query) {
-        params.push(param);
-      }
-    });
-    return params;
-  }
-
-  public request(): RouteParam[] {
-    let params: RouteParam[] = [];
-    this._params.forEach(param => {
-      if (param.kind === RouteParamKind.Request) {
-        params.push(param);
-      }
-    });
-    return params;
-  }
-
   public static load(instance: RouteInfo): Route {
     return new Route(instance);
   }
@@ -150,13 +86,77 @@ export class Route {
     return info;
   }
 
-  public variables(): RouteParam[] {
+  public createHeaders(context?: Object): Object {
+    let headers: Object = {};
+    this.getHeaderParameters().forEach(header => {
+      headers[header.name] = header.resolve(context);
+    });
+    return headers;
+  }
+
+  public createRequest(context?: Object, includeOptionals?: boolean): Object {
+    let request: Object = {};
+    this.getRequestParameters().forEach(param => {
+      let included = param.optional && !includeOptionals ? false : true;
+      if (included) {
+        request[param.name] = param.resolve(context);
+      }
+    });
+    return request;
+  }
+
+  public createUrl(query?: Object, url?: Object): string {
+    let variables = Utils.variables(this.url);
+    return this._url;
+  }
+
+  public getHeaderParameters(): RouteParam[] {
     let params: RouteParam[] = [];
     this._params.forEach(param => {
-      if (param.kind === RouteParamKind.Variable) {
+      if (param.kind === RouteParamKind.Header) {
         params.push(param);
       }
     });
     return params;
+  }
+
+  public getRequestParameters(): RouteParam[] {
+    let params: RouteParam[] = [];
+    this._params.forEach(param => {
+      if (param.kind === RouteParamKind.Request) {
+        params.push(param);
+      }
+    });
+    return params;
+  }
+
+  public getUrlQueryParameters(): RouteParam[] {
+    let params: RouteParam[] = [];
+    this._params.forEach(param => {
+      if (param.kind === RouteParamKind.Query) {
+        params.push(param);
+      }
+    });
+    return params;
+  }
+
+  public getUrlVariables(): RouteParam[] {
+    let params: RouteParam[] = [];
+    this._params.forEach(param => {
+      if (param.kind === RouteParamKind.Url) {
+        params.push(param);
+      }
+    });
+    return params;
+  }
+
+  public param(name: string): RouteParam {
+    for (let index = 0; index < this._params.length; index++) {
+      let param = this._params[index];
+      if (param.name === name) {
+        return param;
+      }
+    }
+    throw new RouteParamNotFound(name);
   }
 }

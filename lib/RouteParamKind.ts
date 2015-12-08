@@ -3,5 +3,5 @@ export enum RouteParamKind {
   Header = 1,
   Query = 2,
   Request = Default,
-  Variable = 3
+  Url = 3
 }
