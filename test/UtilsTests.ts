@@ -21,6 +21,55 @@ describe("Utils", () => {
 
   });
 
+  describe("string functions", () => {
+
+    let expected = "The quick brown fox jumped over the fence.";
+    let expectedMultiple = "The quick brown fox jumped over the fox.";
+
+    describe("expand", () => {
+
+      let multiple: string = "The {action} {color} {animal} jumped over the {animal}.";
+      let single: string = "The {action} {color} {animal} jumped over the {obstacle}.";
+
+      let values = {
+        action: "quick",
+        animal: "fox",
+        color: "brown",
+        obstacle: "fence"
+      };
+
+      it("should expand string", () => {
+        let actual = Utils.expand(single, values);
+        expect(actual).equals(expected);
+      });
+
+      it("should expand string with multiple keys", () => {
+        let actual = Utils.expand(multiple, values);
+        expect(actual).equals(expectedMultiple)
+      });
+
+    });
+
+    describe("format", () => {
+
+      let multiple: string = "The {0} {1} {2} jumped over the {2}.";
+      let single: string = "The {0} {1} {2} jumped over the {3}.";
+      let values: string[] = ["quick", "brown", "fox", "fence"];
+
+      it("should format string", () => {
+        let actual = Utils.format(single, values);
+        expect(actual).equals(expected);
+      });
+
+      it("should format string with multiple indices", () => {
+        let actual = Utils.format(multiple, values);
+        expect(actual).equals(expectedMultiple);
+      });
+
+    });
+
+  });
+
   describe("variables", () => {
 
     let format: { start: string, end: string } = { start: "{:", end: "}" };
