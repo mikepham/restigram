@@ -71,7 +71,7 @@ export class Route {
     return request;
   }
 
-  public createUrl(): string {
+  public createUrl(query?: Object, url?: Object): string {
     return this._url;
   }
 

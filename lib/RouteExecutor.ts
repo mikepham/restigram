@@ -3,7 +3,7 @@
 /// <reference path="../typings/superagent/superagent.d.ts" />
 
 import extend = require("extend");
-import request = require("superagent");
+import superagent = require("superagent");
 
 import {} from "bluebird";
 import {Request, Response} from "superagent";
@@ -12,7 +12,7 @@ import {RouteMethod} from "./RouteMethod";
 import {InvalidExecutorMethod} from "./exceptions/InvalidExecutorMethod";
 
 export interface RouteExecutor {
-  execute(request?: Object, values?: Object, headers?: Object): Promise<Response>;
+  execute(request?: Object, values?: { query: Object, params: Object, url: Object }, headers?: Object): Promise<Response>;
   route: Route;
 }
 
@@ -26,15 +26,28 @@ export class DefaultRouteExecutor implements RouteExecutor {
     return this._route;
   }
 
-  public execute(request?: Object, values?: Object, headers?: Object): Promise<Response> {
+  public execute(request?: Object, values?: { query: Object, params: Object, url: Object }, headers?: Object): Promise<Response> {
     if (request && this.route.method === RouteMethod.Get) {
       throw new InvalidExecutorMethod(this.route.id, this.route.method);
     }
 
     let request_data = extend(true, {}, request, this.route.createRequest());
     let request_headers = extend(true, {}, headers, this.route.createHeaders());
-    let url = this.route.createUrl();
-    let http = request.constructor(this.route.method, url);
+
+    let method = RouteMethod[this.route.method];
+    let url = this.route.createUrl(values.query, values.url);
+    let http = superagent(method, url);
+
+    if (request_data) {
+      http.send(request_data);
+    }
+
+    for (let header in request_headers) {
+      let value = request_headers[header];
+      if (value) {
+        http.set(header, value);
+      }
+    }
 
     return new Promise<Response>((resolve, reject) => {
       return http.end((error, response) => {

@@ -26,7 +26,7 @@ export class RestServiceBuilder {
   public build(): Object {
     let api = {};
     this._routes.forEach(route => {
-      api[route.group || route.name][route.method] = this.route(route);
+      api[route.group || route.name][route.method] = this.route(route).execute;
     });
     return api;
   }
