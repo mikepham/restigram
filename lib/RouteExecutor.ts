@@ -2,11 +2,11 @@
 /// <reference path="../typings/extend/extend.d.ts" />
 /// <reference path="../typings/superagent/superagent.d.ts" />
 
+import {} from "bluebird";
 import extend = require("extend");
 import superagent = require("superagent");
-
-import {} from "bluebird";
 import {SuperAgentRequest, Request, Response} from "superagent";
+
 import {Route} from "./Route";
 import {RouteMethod} from "./RouteMethod";
 import {InvalidExecutorMethod} from "./exceptions/InvalidExecutorMethod";

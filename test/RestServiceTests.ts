@@ -2,6 +2,7 @@
 /// <reference path="../typings/mocha/mocha.d.ts" />
 
 import {expect} from "chai";
+
 import {RestService} from "../lib/RestService";
 import {RestServiceBuilder} from "../lib/RestServiceBuilder";
 import {RestServiceOptions} from "../lib/RestServiceOptions";

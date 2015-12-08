@@ -2,6 +2,7 @@
 /// <reference path="../typings/mocha/mocha.d.ts" />
 
 import {expect} from "chai";
+
 import {RouteParam} from "../lib/RouteParam";
 import {RouteParamInfo} from "../lib/RouteParamInfo";
 import {RouteParamKind} from "../lib/RouteParamKind";

@@ -2,6 +2,7 @@
 /// <reference path="../typings/mocha/mocha.d.ts" />
 
 import {expect} from "chai";
+
 import {RestServiceOptions} from "../lib/RestServiceOptions";
 
 describe("RestServiceOptions", () => {

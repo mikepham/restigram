@@ -1,8 +1,9 @@
 /// <reference path="../typings/chai/chai.d.ts" />
 /// <reference path="../typings/mocha/mocha.d.ts" />
 
-import {Utils} from "../lib/Utils";
 import {expect} from "chai";
+
+import {Utils} from "../lib/Utils";
 
 describe("Utils", () => {
 

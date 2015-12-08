@@ -120,6 +120,16 @@ export class Route {
     return params;
   }
 
+  public getQueryParameters(): RouteParam[] {
+    let params: RouteParam[] = [];
+    this._params.forEach(param => {
+      if (param.kind === RouteParamKind.Query) {
+        params.push(param);
+      }
+    });
+    return params;
+  }
+
   public getRequestParameters(): RouteParam[] {
     let params: RouteParam[] = [];
     this._params.forEach(param => {
@@ -130,17 +140,7 @@ export class Route {
     return params;
   }
 
-  public getUrlQueryParameters(): RouteParam[] {
-    let params: RouteParam[] = [];
-    this._params.forEach(param => {
-      if (param.kind === RouteParamKind.Query) {
-        params.push(param);
-      }
-    });
-    return params;
-  }
-
-  public getUrlVariables(): RouteParam[] {
+  public getUrlParameters(): RouteParam[] {
     let params: RouteParam[] = [];
     this._params.forEach(param => {
       if (param.kind === RouteParamKind.Url) {
