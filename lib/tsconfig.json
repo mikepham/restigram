@@ -3,7 +3,7 @@
     "declaration": true,
     "diagnostics": true,
     "module": "commonjs",
-    "outDir": "../artifacts",
+    "outFile": "../dist/restigram.js",
     "removeComments": true,
     "sourceMap": true,
     "target": "ES5"

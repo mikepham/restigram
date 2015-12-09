@@ -3,7 +3,7 @@
     "declaration": true,
     "diagnostics": true,
     "module": "commonjs",
-    "outDir": "../test-artifacts",
+    "outDir": "../artifacts",
     "sourceMap": true,
     "target": "ES5"
   },

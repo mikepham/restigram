@@ -1,6 +1,4 @@
 # Ignore directories
 artifacts
-dist
 node_modules
-test-artifacts
 typings

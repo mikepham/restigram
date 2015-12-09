@@ -12,7 +12,7 @@ export class RestService {
     this._name = name;
     this._url = url;
 
-    this.refresh();
+    this.generate();
   }
 
   public get builder(): RestServiceBuilder {

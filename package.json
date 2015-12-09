@@ -23,10 +23,10 @@
   "main": "index.js",
   "scripts": {
     "build": "build",
-    "clean": "n-clean artifacts && n-clean dist && n-clean test-artifacts",
+    "clean": "n-clean dist && n-clean artifacts",
     "setup": "setup",
     "pretest": "tsc --project test",
-    "test": "mocha test-artifacts/test",
+    "test": "mocha artifacts/test",
     "watch": "watch \"npm run test\" lib test"
   }
 }
