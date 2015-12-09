@@ -1,4 +1,4 @@
-import {RouteParam} from "./RouteParam";
+import {RouteParam} from "../RouteParam";
 
 export interface RouteParamCollection {
   [name: string]: RouteParam;

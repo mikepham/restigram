@@ -10,6 +10,7 @@ describe("When using the Utils module...", () => {
   describe("..and calling string functions...", () => {
 
     let expected = "The quick brown fox jumped over the fence.";
+    let expectedCallback = "The none none none jumped over the none.";
     let expectedEmpty = "The    jumped over the .";
     let expectedMultiple = "The quick brown fox jumped over the fox.";
 
@@ -40,6 +41,13 @@ describe("When using the Utils module...", () => {
         expect(actual).equals(expectedEmpty);
       });
 
+      it("should expand string using callback", () => {
+        let actual = Utils.expand(single, values, (key, params) => {
+          return "none";
+        });
+        expect(actual).equals(expectedCallback);
+      });
+
     });
 
     describe("format", () => {
@@ -61,6 +69,13 @@ describe("When using the Utils module...", () => {
       it("should format string with empty values when indices not found", () => {
         let actual = Utils.format(single, []);
         expect(actual).equals(expectedEmpty);
+      });
+
+      it("should format string using callback", () => {
+        let actual = Utils.format(single, [], (key, values) => {
+          return "none";
+        });
+        expect(actual).equals(expectedCallback);
       });
 
     });

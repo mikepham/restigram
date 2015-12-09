@@ -1,6 +1,9 @@
+import {ErrorRouteExists} from "./exceptions/ErrorRouteExists";
+import {DefaultRouteExecutor} from "./executors/DefaultRouteExecutor";
 import {RestServiceOptions} from "./RestServiceOptions";
 import {Route} from "./Route";
-import {RouteExecutor, DefaultRouteExecutor} from "./RouteExecutor";
+import {RouteExecutor} from "./interfaces/RouteExecutor";
+import {Utils} from "./Utils";
 
 export class RestServiceBuilder {
   private _options: RestServiceOptions;
@@ -19,13 +22,22 @@ export class RestServiceBuilder {
   }
 
   public add(route: Route): RestServiceBuilder {
+    Utils.contains(this._routes, null, (index, value, array) => {
+      if (value.id === route.id) {
+        throw new ErrorRouteExists(route);
+      }
+      return false;
+    });
     this._routes.push(route);
     return this;
   }
 
-  public build(): Object {
+  public build(url: string): Object {
     let api = {};
     this._routes.forEach(route => {
+      if (route.url !== url) {
+        route.url = url;
+      }
       api[route.group || route.name][route.method] = this.route(route).execute;
     });
     return api;

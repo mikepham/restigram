@@ -1,20 +1,16 @@
-/// <reference path="../typings/bluebird/bluebird.d.ts" />
-/// <reference path="../typings/extend/extend.d.ts" />
-/// <reference path="../typings/superagent/superagent.d.ts" />
+/// <reference path="../../typings/bluebird/bluebird.d.ts" />
+/// <reference path="../../typings/extend/extend.d.ts" />
+/// <reference path="../../typings/superagent/superagent.d.ts" />
 
 import {} from "bluebird";
 import extend = require("extend");
 import superagent = require("superagent");
 import {SuperAgentRequest, Request, Response} from "superagent";
 
-import {Route} from "./Route";
-import {RouteMethod} from "./RouteMethod";
-import {InvalidExecutorMethod} from "./exceptions/InvalidExecutorMethod";
-
-export interface RouteExecutor {
-  execute(request?: Object, values?: { query: Object, params: Object, url: Object }, headers?: Object): Promise<Response>;
-  route: Route;
-}
+import {ErrorRouteExecute} from "../exceptions/ErrorRouteExecute";
+import {Route} from "../Route";
+import {RouteExecutor} from "../interfaces/RouteExecutor";
+import {RouteMethod} from "../RouteMethod";
 
 export class DefaultRouteExecutor implements RouteExecutor {
   private _route: Route;
@@ -28,7 +24,7 @@ export class DefaultRouteExecutor implements RouteExecutor {
 
   public execute(request?: Object, values?: { query: Object, params: Object, url: Object }, headers?: Object): Promise<Response> {
     if (request && this.route.method === RouteMethod.Get) {
-      throw new InvalidExecutorMethod(this.route.id, this.route.method);
+      throw new ErrorRouteExecute(this.route);
     }
 
     let request_data: Object = extend(true, {}, request, this.route.createRequest());

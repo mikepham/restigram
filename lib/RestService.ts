@@ -32,6 +32,6 @@ export class RestService {
   }
 
   protected generate(): void {
-    this._api = this._builder.build();
+    this._api = this._builder.build(this.url);
   }
 }

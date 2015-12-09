@@ -6,9 +6,9 @@ import {RouteAuth} from "./RouteAuth";
 import {RouteInfo} from "./RouteInfo";
 import {RouteMethod} from "./RouteMethod";
 import {RouteParam} from "./RouteParam";
-import {RouteParamCollection} from "./RouteParamCollection";
+import {RouteParamCollection} from "./interfaces/RouteParamCollection";
 import {RouteParamKind} from "./RouteParamKind";
-import {RouteParamNotFound} from "./exceptions/RouteParamNotFound";
+import {ErrorRouteParamNotFound} from "./exceptions/ErrorRouteParamNotFound";
 import {Utils} from "./Utils";
 
 export class Route {
@@ -157,6 +157,6 @@ export class Route {
         return param;
       }
     }
-    throw new RouteParamNotFound(name);
+    throw new ErrorRouteParamNotFound(name);
   }
 }

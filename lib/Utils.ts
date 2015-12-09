@@ -1,21 +1,29 @@
 export module Utils {
-  export function contains(array: any[], value: any) {
+  export function contains(array: any[], value: any, callback?: (index: number, value: any, array: any[]) => boolean) {
     for (let index = 0; index < array.length; index++) {
-      if (array[index] === value) {
+      if (callback && callback(index, array[index], array)) {
+        return true;
+      } else if (array[index] === value) {
         return true;
       }
     }
     return false;
   }
 
-  export function expand(message: string, params: Object): string {
+  export function expand(message: string, params: Object, callback?: (key: string, params: Object) => string): string {
     return message.replace(/{(\w+)}/igm, (match, key) => {
+      if (callback) {
+        return callback(match, params);
+      }
       return params[key] || "";
     });
   }
 
-  export function format(message: string, values: string[]): string {
+  export function format(message: string, values: string[], callback?: (key: string, values: string[]) => string): string {
     return message.replace(/{(\d+)}/gm, (match, index) => {
+      if (callback) {
+        return callback(match, values);
+      }
       return values[index] || "";
     });
   }
