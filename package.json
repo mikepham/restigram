@@ -20,7 +20,7 @@
     "typescript": "^1.7.3",
     "watch": "^0.16.0"
   },
-  "main": "index.js",
+  "main": "targets/node.js",
   "scripts": {
     "build": "build",
     "clean": "n-clean dist && n-clean artifacts",
