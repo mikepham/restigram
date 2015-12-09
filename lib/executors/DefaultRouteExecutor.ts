@@ -38,7 +38,7 @@ export class DefaultRouteExecutor implements RouteExecutor {
       http.send(request_data);
     }
 
-    this.setHeaders(http, headers);
+    this.setHeaders(http, request_headers);
 
     return new Promise<Response>((resolve, reject) => {
       return http.end((error: Error, response: Response) => {

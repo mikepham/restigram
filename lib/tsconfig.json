@@ -3,6 +3,7 @@
     "declaration": true,
     "diagnostics": true,
     "module": "commonjs",
+    "outDir": "../dist/ts",
     "outFile": "../dist/restigram.js",
     "removeComments": true,
     "sourceMap": true,
