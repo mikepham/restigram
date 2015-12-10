@@ -27,6 +27,10 @@ export class RestServiceBuilder {
     return this._options;
   }
 
+  protected get api(): any {
+    return this._api;
+  }
+
   public add(route: Route): RestServiceBuilder {
     Utils.contains(this._routes, null, (index, value, array) => {
       if (value.id === route.id) {

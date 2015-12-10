@@ -6,6 +6,7 @@ call npm install
 REM "Install typings for Typescript."
 call tsd query bluebird --save --action install
 call tsd query chai --save --action install
+call tsd query cheerio --save --action install
 call tsd query extend --save --action install
 call tsd query jquery --save --action install
 call tsd query mocha --save --action install
