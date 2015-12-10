@@ -1,4 +1,4 @@
-/// <reference path="../typings/bluebird/bluebird.d.ts" />
+/// <reference path="../typings/tsd.d.ts" />
 
 import {} from "bluebird";
 
@@ -63,6 +63,16 @@ export class RestServiceBuilder {
         return true;
       }
     }
+  }
+
+  public group(name: string): Route[] {
+    let routes: Route[] = [];
+    this._routes.forEach(route => {
+      if (route.route.group === name) {
+        routes.push(route.route);
+      }
+    });
+    return routes;
   }
 
   protected route(api: any, route: Route): RouteExecutor {

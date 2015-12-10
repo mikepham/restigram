@@ -1,4 +1,12 @@
+/// <reference path="links.d.ts" />
+
 export module Utils {
+  export function capitalize(value: string): string {
+    let capitalized = value.toLowerCase();
+    let first = capitalized[0].toUpperCase();
+    return first + capitalized.substring(1, capitalized.length);
+  }
+
   export function contains(array: any[], value: any, callback?: (index: number, value: any, array: any[]) => boolean) {
     for (let index = 0; index < array.length; index++) {
       if (callback && callback(index, array[index], array)) {
@@ -28,12 +36,23 @@ export module Utils {
     });
   }
 
+  export function split(value: string): string[] {
+    let parts: string[] = value.split(",");
+    let results: string[] = [];
+    parts.forEach(part => {
+      let cleaned = part.trim();
+      if (!contains(results, cleaned)) {
+        results.push(cleaned);
+      }
+    });
+    return results;
+  }
+
   export function variables(value: string, format: { start: string, end: string } = { start: "\{", end: "\}" }): string[] {
     let results: string[] = [];
     let regex = format.start + "(.*?)" + format.end;
     let regexp = new RegExp(regex, "igm");
     let match = regexp.exec(value);
-
     while (match) {
       let token = match[1];
       if (!Utils.contains(results, token)) {
@@ -41,7 +60,6 @@ export module Utils {
       }
       match = regexp.exec(value);
     }
-
     return results;
   }
 }

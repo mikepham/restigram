@@ -1,6 +1,4 @@
-/// <reference path="../../typings/bluebird/bluebird.d.ts" />
-/// <reference path="../../typings/superagent/superagent.d.ts" />
-/// <reference path="../../typings/urijs/urijs.d.ts" />
+/// <reference path="../../typings/tsd.d.ts" />
 
 import {} from "bluebird";
 import superagent = require("superagent");

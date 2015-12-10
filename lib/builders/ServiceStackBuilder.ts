@@ -1,7 +1,4 @@
-/// <reference path="../../typings/bluebird/bluebird.d.ts" />
-/// <reference path="../../typings/cheerio/cheerio.d.ts" />
-/// <reference path="../../typings/superagent/superagent.d.ts" />
-/// <reference path="../../typings/urijs/urijs.d.ts" />
+/// <reference path="../../typings/tsd.d.ts" />
 
 import {} from "bluebird";
 import cheerio = require("cheerio");
@@ -13,6 +10,9 @@ import {RestServiceBuilder} from "../RestServiceBuilder";
 import {Route} from "../Route";
 import {RouteInfo} from "../RouteInfo";
 import {RouteMethod} from "../RouteMethod";
+import {RouteParam} from "../RouteParam";
+import {RouteParamInfo} from "../RouteParamInfo";
+import {RouteParamKind} from "../RouteParamKind";
 import {ServiceStackOptions} from "./ServiceStackOptions";
 import {Utils} from "../Utils";
 
@@ -84,32 +84,50 @@ export class ServiceStackBuilder extends RestServiceBuilder {
       // Parse HTML for verbs and request object.
       let form = $("form");
       let info = $("table tbody tr", form);
+      let request_example = $("div.example div.request pre").text().match(/{.*}/gm)[0];
+      let json = JSON.parse(request_example);
 
       for (let index = 0; index < info.length; index++) {
         let $info = info[index];
         let $headers = $("th", $info);
         let path = $($headers[1]).text();
         let methods = this.parseVerbs($($headers[0]).text());
-        this.buildServiceRoutes(name, path, methods);
+        this.buildServiceRoutes(name, path, methods, json);
       }
-
-      let example = $("div.example div.request pre").text();
     }).catch(error => {
       console.log(error);
       console.trace();
     });
   }
 
-  private buildServiceRoutes(name: string, path: string, methods: RouteMethod[]): void {
+  private buildServiceRoutes(name: string, path: string, methods: RouteMethod[], request: any): void {
     methods.forEach(method => {
-      let info = new RouteInfo();
-      info.group = name;
-      info.id = name + RouteMethod[method];
-      info.method = method;
-      info.name = name;
-      info.path = path;
+      let route_info = new RouteInfo();
+      route_info.group = name;
+      route_info.id = name + RouteMethod[method];
+      route_info.method = method;
+      route_info.name = name;
+      route_info.path = path;
 
-      this.add(new Route(info));
+      let params: RouteParam[] = [];
+
+      Utils.variables(path).forEach(variable => {
+        let param_info = new RouteParamInfo();
+        param_info.kind = RouteParamKind.Url;
+        param_info.name = variable;
+        param_info.type = "string";
+        params.push(new RouteParam(param_info));
+      });
+
+      Object.keys(request).forEach(key => {
+        let param_info = new RouteParamInfo();
+        param_info.kind = RouteParamKind.Request;
+        param_info.name = key;
+        param_info.type = "any";
+        params.push(new RouteParam(param_info));
+      });
+
+      this.add(new Route(route_info, params));
     });
   }
 
@@ -126,11 +144,8 @@ export class ServiceStackBuilder extends RestServiceBuilder {
           }
         });
     } else {
-      let names = verbs.toLowerCase().split(",");
-      names.forEach(name => {
-        name = name.trim();
-        name = name[0].toUpperCase() + name.substring(1, name.length);
-        methods.push(RouteMethod[name]);
+      Utils.split(verbs).forEach(verb => {
+        methods.push(RouteMethod[Utils.capitalize(verb)]);
       });
     }
     return methods;

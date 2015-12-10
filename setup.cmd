@@ -9,7 +9,10 @@ call tsd query chai --save --action install
 call tsd query cheerio --save --action install
 call tsd query extend --save --action install
 call tsd query jquery --save --action install
+call tsd query linq --save --action install
 call tsd query mocha --save --action install
 call tsd query superagent --save --action install
 call tsd query urijs --save --action install
 call tsd query watch --save --action install
+call tsd link
+call tsd rebundle

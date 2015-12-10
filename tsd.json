@@ -6,34 +6,37 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "bluebird/bluebird.d.ts": {
-      "commit": "827b5fea75f5a1aa87a4cf2f84aa7f0aa0b72fa0"
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
     },
     "chai/chai.d.ts": {
-      "commit": "827b5fea75f5a1aa87a4cf2f84aa7f0aa0b72fa0"
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
     },
     "extend/extend.d.ts": {
-      "commit": "827b5fea75f5a1aa87a4cf2f84aa7f0aa0b72fa0"
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
     },
     "mocha/mocha.d.ts": {
-      "commit": "827b5fea75f5a1aa87a4cf2f84aa7f0aa0b72fa0"
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
     },
     "node/node.d.ts": {
       "commit": "c3ab375b371b7b4204adee3b1209baecd81cec02"
     },
     "superagent/superagent.d.ts": {
-      "commit": "827b5fea75f5a1aa87a4cf2f84aa7f0aa0b72fa0"
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
     },
     "urijs/URIjs.d.ts": {
-      "commit": "827b5fea75f5a1aa87a4cf2f84aa7f0aa0b72fa0"
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
     },
     "watch/watch.d.ts": {
-      "commit": "827b5fea75f5a1aa87a4cf2f84aa7f0aa0b72fa0"
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
     },
     "jquery/jquery.d.ts": {
-      "commit": "827b5fea75f5a1aa87a4cf2f84aa7f0aa0b72fa0"
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
     },
     "cheerio/cheerio.d.ts": {
-      "commit": "827b5fea75f5a1aa87a4cf2f84aa7f0aa0b72fa0"
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
+    },
+    "linq/linq.d.ts": {
+      "commit": "f8af639bf29b2b00e5d27ce93c0f046564b8525c"
     }
   }
 }

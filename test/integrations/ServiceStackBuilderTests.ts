@@ -6,6 +6,7 @@ import {ServiceStackBuilder} from "../../lib/builders/ServiceStackBuilder";
 import {ServiceStackOptions} from "../../lib/builders/ServiceStackOptions";
 
 describe("When using the ServiceStackBuilder class...", () => {
+
   let builder: ServiceStackBuilder;
   let options: ServiceStackOptions;
 
@@ -14,13 +15,14 @@ describe("When using the ServiceStackBuilder class...", () => {
     builder = new ServiceStackBuilder(options);
   });
 
-  it("should build routes from metadata", (done) => {
+  it("should build routes from metadata and package into groups", (done) => {
     builder.build("https://api-qa01-iol.homenetauto.com").then(api => {
       expect(api).not.undefined;
       expect(api.Auth).not.undefined;
-      expect(api.Auth.post).not.undefined;
+      expect(api.Auth.get).instanceof(Function);
       expect(api.Auth.post).instanceof(Function);
       done();
     });
   });
+
 });
