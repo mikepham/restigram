@@ -1,5 +1,5 @@
-import {RestServiceOptions} from "../../lib/RestServiceOptions";
-import {RouteAuth} from "../../lib/RouteAuth";
+import {RestServiceOptions} from "../RestServiceOptions";
+import {RouteAuth} from "../RouteAuth";
 
 export class ServiceStackOptions extends RestServiceOptions {
   public authRouteName: string = "Auth";

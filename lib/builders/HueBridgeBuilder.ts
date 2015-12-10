@@ -7,12 +7,12 @@ import superagent = require("superagent");
 import {SuperAgentRequest, Request, Response} from "superagent";
 import {} from "urijs";
 
-import {RestServiceBuilder} from "../../lib/RestServiceBuilder";
-import {RestServiceOptions} from "../../lib/RestServiceOptions";
-import {Route} from "../../lib/Route";
-import {RouteAuth} from "../../lib/RouteAuth";
-import {RouteInfo} from "../../lib/RouteInfo";
-import {RouteMethod} from "../../lib/RouteMethod";
+import {RestServiceBuilder} from "../RestServiceBuilder";
+import {RestServiceOptions} from "../RestServiceOptions";
+import {Route} from "../Route";
+import {RouteAuth} from "../RouteAuth";
+import {RouteInfo} from "../RouteInfo";
+import {RouteMethod} from "../RouteMethod";
 
 export class HueBridgeBuilder extends RestServiceBuilder {
   private static nupnp: string = "https://www.meethue.com/api/nupnp";
