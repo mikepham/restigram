@@ -13,14 +13,17 @@ var DefaultRouteExecutor = (function () {
         enumerable: true,
         configurable: true
     });
-    DefaultRouteExecutor.prototype.execute = function (request, values, headers) {
+    DefaultRouteExecutor.prototype.execute = function (request, values) {
         if (request && this.route.method === RouteMethod_1.RouteMethod.Get) {
             throw new ErrorRouteExecute_1.ErrorRouteExecute(this.route);
         }
+        var header_values = values ? this.toObject(values.headers) : null;
+        var query_values = values ? this.toObject(values.query) : null;
+        var url_values = values ? this.toObject(values.url) : null;
         var request_data = extend(true, {}, request, this.route.createRequest());
-        var request_headers = extend(true, {}, headers, this.route.createHeaders());
+        var request_headers = extend(true, {}, header_values, this.route.createHeaders());
         var method = RouteMethod_1.RouteMethod[this.route.method];
-        var url = this.route.createUrl(values.query, values.url);
+        var url = this.route.createUrl(query_values, url_values);
         var http = superagent(method, url);
         if (request_data) {
             http.send(request_data);
@@ -51,6 +54,13 @@ var DefaultRouteExecutor = (function () {
                 }
             }
         }
+    };
+    DefaultRouteExecutor.prototype.toObject = function (kvp) {
+        var values = {};
+        kvp.forEach(function (key, value) {
+            values[key] = value;
+        });
+        return values;
     };
     return DefaultRouteExecutor;
 })();
