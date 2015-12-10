@@ -9,6 +9,7 @@ import {ErrorRouteExecute} from "../exceptions/ErrorRouteExecute";
 import {Route} from "../Route";
 import {RouteExecutor} from "../interfaces/RouteExecutor";
 import {RouteMethod} from "../RouteMethod";
+import {RouteParamValues} from "../RouteParamValues";
 
 export class DefaultRouteExecutor implements RouteExecutor {
   private _route: Route;
@@ -20,16 +21,21 @@ export class DefaultRouteExecutor implements RouteExecutor {
     return this._route;
   }
 
-  public execute(request?: Object, values?: { query: Object, params: Object, url: Object }, headers?: Object): Promise<Response> {
+  public execute();
+  public execute(request?: Object, values?: RouteParamValues): Promise<Response> {
     if (request && this.route.method === RouteMethod.Get) {
       throw new ErrorRouteExecute(this.route);
     }
 
+    let header_values: any = values ? this.toObject(values.headers) : null;
+    let query_values: any = values ? this.toObject(values.query) : null;
+    let url_values: any = values ? this.toObject(values.url) : null;
+
     let request_data: Object = extend(true, {}, request, this.route.createRequest());
-    let request_headers: Object = extend(true, {}, headers, this.route.createHeaders());
+    let request_headers: Object = extend(true, {}, header_values, this.route.createHeaders());
 
     let method: string = RouteMethod[this.route.method];
-    let url: string = this.route.createUrl(values.query, values.url);
+    let url: string = this.route.createUrl(query_values, url_values);
     let http: SuperAgentRequest = superagent(method, url);
 
     if (request_data) {
@@ -63,5 +69,13 @@ export class DefaultRouteExecutor implements RouteExecutor {
         }
       }
     }
+  }
+
+  private toObject(kvp: collections.Dictionary<string, string>): any {
+    let values = {};
+    kvp.forEach((key, value) => {
+      values[key] = value;
+    });
+    return values;
   }
 }
