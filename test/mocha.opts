@@ -1,0 +1,6 @@
+--check-leaks
+--debug-brk
+--full-trace
+--inline-diffs
+--recursive
+--ui bdd

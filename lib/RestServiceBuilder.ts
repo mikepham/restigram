@@ -1,13 +1,19 @@
+/// <reference path="../typings/bluebird/bluebird.d.ts" />
+
+import {} from "bluebird";
+
 import {ErrorRouteExists} from "./exceptions/ErrorRouteExists";
 import {DefaultRouteExecutor} from "./executors/DefaultRouteExecutor";
 import {RestServiceOptions} from "./RestServiceOptions";
 import {Route} from "./Route";
 import {RouteExecutor} from "./interfaces/RouteExecutor";
+import {RouteMethod} from "./RouteMethod";
 import {Utils} from "./Utils";
 
 export class RestServiceBuilder {
+  private _api: any = {};
   private _options: RestServiceOptions;
-  private _routes: Route[] = [];
+  private _routes: { route: Route, executor: RouteExecutor }[] = [];
 
   public constructor(options: RestServiceOptions) {
     this._options = options;
@@ -28,31 +34,43 @@ export class RestServiceBuilder {
       }
       return false;
     });
-    this._routes.push(route);
+    this._routes.push({ route: route, executor: this.route(this._api, route) });
     return this;
   }
 
-  public build(url: string): Object {
-    let api = {};
-    this._routes.forEach(route => {
-      if (route.url !== url) {
-        route.url = url;
-      }
-      api[route.group || route.name][route.method] = this.route(route).execute;
-    });
-    return api;
+  public build(url?: string): Promise<any> {
+    this._api = {};
+
+    if (url) {
+      this._routes.forEach(route => {
+        if (route.route.url !== url) {
+          route.route.url = url;
+        }
+        this.route(this._api, route.route);
+      });
+    }
+    return Promise.resolve(this._api);
   }
 
   public exists(id: string): boolean {
     for (let index = 0; index < this._routes.length; index++) {
       let route = this._routes[index];
-      if (route.id === id) {
+      if (route.route.id === id) {
         return true;
       }
     }
   }
 
-  protected route(route: Route): RouteExecutor {
-    return new DefaultRouteExecutor(route);
+  protected route(api: any, route: Route): RouteExecutor {
+    let executor = new DefaultRouteExecutor(route);
+    let group = route.group || route.id;
+    let method = RouteMethod[route.method];
+
+    if (!api[group]) {
+      api[group] = {};
+    }
+
+    api[group][method ? method.toLowerCase() : method] = executor.execute;
+    return executor;
   }
 }

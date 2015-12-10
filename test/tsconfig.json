@@ -4,6 +4,7 @@
     "diagnostics": true,
     "module": "commonjs",
     "outDir": "../artifacts",
+    "removeComments": true,
     "sourceMap": true,
     "target": "ES5"
   },

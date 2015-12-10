@@ -1,3 +1,7 @@
+/// <reference path="../typings/bluebird/bluebird.d.ts" />
+
+import {} from "bluebird";
+
 import {RestServiceBuilder} from "./RestServiceBuilder";
 import {RestServiceOptions} from "./RestServiceOptions";
 
@@ -31,7 +35,10 @@ export class RestService {
     this.generate();
   }
 
-  protected generate(): void {
-    this._api = this._builder.build(this.url);
+  protected generate(): Promise<any> {
+    return this._builder.build(this.url).then(api => {
+      this._api = api;
+      return this._api;
+    });
   }
 }
