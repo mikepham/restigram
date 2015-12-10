@@ -7,7 +7,7 @@ import {Utils} from "../lib/Utils";
 
 describe("When using the Utils module...", () => {
 
-  describe("..and calling string functions...", () => {
+  describe("and calling string function,", () => {
 
     let expected = "The quick brown fox jumped over the fence.";
     let expectedCallback = "The none none none jumped over the none.";
@@ -44,25 +44,23 @@ describe("When using the Utils module...", () => {
         obstacle: "fence"
       };
 
-      it("should expand string", () => {
+      it("should return expanded string", () => {
         let actual = Utils.expand(single, values);
         expect(actual).equals(expected);
       });
 
-      it("should expand string with multiple keys", () => {
+      it("should return expanded string with multiple keys", () => {
         let actual = Utils.expand(multiple, values);
         expect(actual).equals(expectedMultiple)
       });
 
-      it("should expand string with empty values when keys not found", () => {
+      it("should return expanded string with empty values when keys not found", () => {
         let actual = Utils.expand(single, {});
         expect(actual).equals(expectedEmpty);
       });
 
-      it("should expand string using callback", () => {
-        let actual = Utils.expand(single, values, (key, params) => {
-          return "none";
-        });
+      it("should return expanded string using callback", () => {
+        let actual = Utils.expand(single, key => "none");
         expect(actual).equals(expectedCallback);
       });
 
@@ -90,9 +88,7 @@ describe("When using the Utils module...", () => {
       });
 
       it("should format string using callback", () => {
-        let actual = Utils.format(single, [], (key, values) => {
-          return "none";
-        });
+        let actual = Utils.format(single, (key) => "none");
         expect(actual).equals(expectedCallback);
       });
 
@@ -110,6 +106,14 @@ describe("When using the Utils module...", () => {
 
     it("should return true when value in array", () => {
       expect(Utils.contains(testable, "mangos")).true;
+    });
+
+    it("should return false when custom callback used", () => {
+      expect(Utils.contains(testable, (value, index) => false)).false;
+    });
+
+    it("should return true when custom callback used", () => {
+      expect(Utils.contains(testable, (value, index) => true)).true;
     });
 
   });

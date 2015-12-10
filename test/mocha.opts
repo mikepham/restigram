@@ -3,4 +3,5 @@
 --full-trace
 --inline-diffs
 --recursive
+--timeout 5000
 --ui bdd

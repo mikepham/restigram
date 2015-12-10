@@ -10,10 +10,19 @@ import {RouteExecutor} from "./interfaces/RouteExecutor";
 import {RouteMethod} from "./RouteMethod";
 import {Utils} from "./Utils";
 
+class RouteMapper {
+  public executor: RouteExecutor;
+  public route: Route;
+  constructor(route: Route, executor: RouteExecutor) {
+    this.executor = executor;
+    this.route = route;
+  }
+}
+
 export class RestServiceBuilder {
   private _api: any = {};
   private _options: RestServiceOptions;
-  private _routes: { route: Route, executor: RouteExecutor }[] = [];
+  private _routes: RouteMapper[] = [];
 
   public constructor(options: RestServiceOptions) {
     this._options = options;
@@ -32,13 +41,9 @@ export class RestServiceBuilder {
   }
 
   public add(route: Route): RestServiceBuilder {
-    Utils.contains(this._routes, null, (index, value, array) => {
-      if (value.id === route.id) {
-        throw new ErrorRouteExists(route);
-      }
-      return false;
-    });
-    this._routes.push({ route: route, executor: this.route(this._api, route) });
+    if (!Utils.contains<RouteMapper>(this._routes, value => value.route.id === route.id)) {
+      this._routes.push(new RouteMapper(route, this.route(this._api, route)));
+    }
     return this;
   }
 
