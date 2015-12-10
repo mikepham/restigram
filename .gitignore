@@ -2,3 +2,6 @@
 artifacts
 node_modules
 typings
+
+# Ignore logs
+*.log
