@@ -14,6 +14,24 @@ describe("When using the Utils module...", () => {
     let expectedEmpty = "The    jumped over the .";
     let expectedMultiple = "The quick brown fox jumped over the fox.";
 
+    describe("capitalize", () => {
+
+      const sut_all_lower: string = "first";
+      const sut_mixed: string = "fiRST";
+      const expected: string = "First";
+
+      it("should capitalize lowercase string", () => {
+        let actual: string = Utils.capitalize(sut_all_lower);
+        expect(actual).equals(expected);
+      });
+
+      it("should capitalize mixed-case string", () => {
+        let actual: string = Utils.capitalize(sut_mixed);
+        expect(actual).equals(expected);
+      });
+
+    });
+
     describe("expand", () => {
 
       let multiple: string = "The {action} {color} {animal} jumped over the {animal}.";
