@@ -16,18 +16,31 @@ describe("When using the Utils module...", () => {
 
     describe("capitalize", () => {
 
-      const sut_all_lower: string = "first";
-      const sut_mixed: string = "fiRST";
+      const all_lower: string = "first";
+      const mixed_case: string = "fiRST";
+      const sentence: string = "this is the story of mice and men.";
       const expected: string = "First";
+      const expected_sentence: string = "This is the story of mice and men."
+      const expected_sentence_all: string = "This Is The Story Of Mice And Men.";
 
       it("should capitalize lowercase string", () => {
-        let actual: string = Utils.capitalize(sut_all_lower);
+        let actual: string = Utils.capitalize(all_lower);
         expect(actual).equals(expected);
       });
 
       it("should capitalize mixed-case string", () => {
-        let actual: string = Utils.capitalize(sut_mixed);
+        let actual: string = Utils.capitalize(mixed_case);
         expect(actual).equals(expected);
+      });
+
+      it("should capitalize first word of sentence", () => {
+        let actual: string = Utils.capitalize(sentence);
+        expect(actual).equals(expected_sentence);
+      });
+
+      it("should capitalize every word of sentence", () => {
+        let actual: string = Utils.capitalize(sentence, true);
+        expect(actual).equals(expected_sentence_all);
       });
 
     });

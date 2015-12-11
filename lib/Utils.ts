@@ -3,10 +3,20 @@
 import {} from "humanize-plus";
 
 export module Utils {
-  export function capitalize(value: string): string {
-    let capitalized = value.toLowerCase();
-    let first = capitalized[0].toUpperCase();
-    return first + capitalized.substring(1, capitalized.length);
+  export function capitalize(value: string, all: boolean = false): string {
+    let sentence = [];
+    let words = split(value, " ");
+
+    words.forEach((value, index) => {
+      let word: string = value;
+      if (all || index === 0) {
+        let capitalized = value.toLowerCase();
+        let first = capitalized[0].toUpperCase();
+        word = first + capitalized.substring(1, capitalized.length);
+      }
+      sentence.push(word);
+    });
+    return sentence.join(" ");
   }
 
   export function contains<T>(array: T[], callback: (value: T, index: number) => boolean): boolean;
@@ -45,8 +55,8 @@ export module Utils {
     });
   }
 
-  export function split(value: string): string[] {
-    let parts: string[] = value.split(",");
+  export function split(value: string, separator: string = ","): string[] {
+    let parts: string[] = value.split(separator);
     let results: string[] = [];
     parts.forEach(part => {
       let cleaned = part.trim();
