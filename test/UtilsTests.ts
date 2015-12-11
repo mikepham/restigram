@@ -7,14 +7,14 @@ import {Utils} from "../lib/Utils";
 
 describe("When using the Utils module...", () => {
 
-  describe("and calling string function,", () => {
+  describe("and calling string function", () => {
 
     let expected = "The quick brown fox jumped over the fence.";
     let expectedCallback = "The none none none jumped over the none.";
     let expectedEmpty = "The    jumped over the .";
     let expectedMultiple = "The quick brown fox jumped over the fox.";
 
-    describe("capitalize", () => {
+    describe("capitalize,", () => {
 
       const all_lower: string = "first";
       const mixed_case: string = "fiRST";
@@ -45,7 +45,7 @@ describe("When using the Utils module...", () => {
 
     });
 
-    describe("expand", () => {
+    describe("expand,", () => {
 
       let multiple: string = "The {action} {color} {animal} jumped over the {animal}.";
       let single: string = "The {action} {color} {animal} jumped over the {obstacle}.";
@@ -79,7 +79,7 @@ describe("When using the Utils module...", () => {
 
     });
 
-    describe("format", () => {
+    describe("format,", () => {
 
       let multiple: string = "The {0} {1} {2} jumped over the {2}.";
       let single: string = "The {0} {1} {2} jumped over the {3}.";
@@ -109,7 +109,7 @@ describe("When using the Utils module...", () => {
 
   });
 
-  describe("contains", () => {
+  describe("contains,", () => {
 
     let testable: string[] = ["apples", "bananas", "mangos", "oranges"];
 
@@ -131,7 +131,7 @@ describe("When using the Utils module...", () => {
 
   });
 
-  describe("variables", () => {
+  describe("variables,", () => {
 
     let format: { start: string, end: string } = { start: "{:", end: "}" };
     let customVariableString: string = "/testables/{:testable}/{:index}";
