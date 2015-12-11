@@ -101,9 +101,11 @@ export class ServiceStackBuilder extends RestServiceBuilder {
   }
 
   private buildServiceRoutes(name: string, path: string, methods: RouteMethod[], request: any): void {
+    let options: ServiceStackOptions = <ServiceStackOptions>this.options;
+
     methods.forEach(method => {
       let route_info = new RouteInfo();
-      route_info.group = name;
+      route_info.group = options.mappings[name] || name;
       route_info.id = name + RouteMethod[method];
       route_info.method = method;
       route_info.name = name;

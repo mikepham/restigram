@@ -6,6 +6,7 @@ import {HueBridgeBuilder} from "../../lib/builders/HueBridgeBuilder";
 import {RestServiceOptions} from "../../lib/RestServiceOptions";
 
 describe("When using the HueBridgeBuilder class...", () => {
+
   let options = new RestServiceOptions();
   let builder = new HueBridgeBuilder(options);
 
