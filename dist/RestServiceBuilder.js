@@ -4,9 +4,23 @@ var RouteMethod_1 = require("./RouteMethod");
 var Utils_1 = require("./Utils");
 var RouteMapper = (function () {
     function RouteMapper(route, executor) {
-        this.executor = executor;
-        this.route = route;
+        this._executor = executor;
+        this._route = route;
     }
+    Object.defineProperty(RouteMapper.prototype, "executor", {
+        get: function () {
+            return this._executor;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouteMapper.prototype, "route", {
+        get: function () {
+            return this._route;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return RouteMapper;
 })();
 var RestServiceBuilder = (function () {

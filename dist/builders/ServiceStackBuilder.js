@@ -97,9 +97,10 @@ var ServiceStackBuilder = (function (_super) {
     };
     ServiceStackBuilder.prototype.buildServiceRoutes = function (name, path, methods, request) {
         var _this = this;
+        var options = this.options;
         methods.forEach(function (method) {
             var route_info = new RouteInfo_1.RouteInfo();
-            route_info.group = name;
+            route_info.group = options.mappings[name] || name;
             route_info.id = name + RouteMethod_1.RouteMethod[method];
             route_info.method = method;
             route_info.name = name;

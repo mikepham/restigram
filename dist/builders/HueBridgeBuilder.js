@@ -10,6 +10,27 @@ var Route_1 = require("../Route");
 var RouteAuth_1 = require("../RouteAuth");
 var RouteInfo_1 = require("../RouteInfo");
 var RouteMethod_1 = require("../RouteMethod");
+var BridgeInfo = (function () {
+    function BridgeInfo(info) {
+        this._id = info.id;
+        this._internalipaddress = info.internalipaddress;
+    }
+    Object.defineProperty(BridgeInfo.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BridgeInfo.prototype, "internalipaddress", {
+        get: function () {
+            return this._internalipaddress;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return BridgeInfo;
+})();
 var HueBridgeBuilder = (function (_super) {
     __extends(HueBridgeBuilder, _super);
     function HueBridgeBuilder(options) {
@@ -20,8 +41,10 @@ var HueBridgeBuilder = (function (_super) {
         var api = {
             bridges: []
         };
-        return this.getBridgeInfo().then(function (response) {
-            var bridges = response;
+        return this.retrieveBridgeInfo()
+            .then(function (response) {
+            var bridges = [];
+            response.forEach(function (x) { return bridges.push(new BridgeInfo(x)); });
             bridges.forEach(function (bridge) {
                 api.bridges.push(bridge);
                 api[bridge.id] = {};
@@ -29,6 +52,10 @@ var HueBridgeBuilder = (function (_super) {
                 _this.buildBridgeCalls(address, api[bridge.id]);
             });
             return api;
+        })
+            .catch(function (error) {
+            console.error(error);
+            console.trace();
         });
     };
     HueBridgeBuilder.prototype.buildBridgeCalls = function (url, api) {
@@ -55,7 +82,7 @@ var HueBridgeBuilder = (function (_super) {
         set_light_state.url = url.toString();
         this.route(api, new Route_1.Route(set_light_state));
     };
-    HueBridgeBuilder.prototype.getBridgeInfo = function () {
+    HueBridgeBuilder.prototype.retrieveBridgeInfo = function () {
         var request = superagent(HueBridgeBuilder.nupnp);
         return new Promise(function (resolve, reject) {
             return request.end(function (error, response) {

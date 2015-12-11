@@ -7,5 +7,5 @@ export declare class HueBridgeBuilder extends RestServiceBuilder {
     build(url: string): Promise<any>;
     private buildBridgeCalls(url, api);
     private buildLightRoutes(url, api);
-    private getBridgeInfo();
+    private retrieveBridgeInfo();
 }

@@ -39,6 +39,7 @@
   "scripts": {
     "build": "build",
     "clean": "n-clean dist && n-clean artifacts",
+    "publish": "publish",
     "setup": "setup",
     "pretest": "tsc --project test",
     "test": "mocha artifacts/test",

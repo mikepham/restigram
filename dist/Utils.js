@@ -1,10 +1,20 @@
 /// <reference path="links.d.ts" />
 var Utils;
 (function (Utils) {
-    function capitalize(value) {
-        var capitalized = value.toLowerCase();
-        var first = capitalized[0].toUpperCase();
-        return first + capitalized.substring(1, capitalized.length);
+    function capitalize(value, all) {
+        if (all === void 0) { all = false; }
+        var sentence = [];
+        var words = split(value, " ");
+        words.forEach(function (value, index) {
+            var word = value;
+            if (all || index === 0) {
+                var capitalized = value.toLowerCase();
+                var first = capitalized[0].toUpperCase();
+                word = first + capitalized.substring(1, capitalized.length);
+            }
+            sentence.push(word);
+        });
+        return sentence.join(" ");
     }
     Utils.capitalize = capitalize;
     function contains(array, valueOrCallback) {
@@ -39,8 +49,20 @@ var Utils;
         });
     }
     Utils.format = format;
-    function split(value) {
-        var parts = value.split(",");
+    function select(collection, callback) {
+        var results = [];
+        if (collection instanceof Array) {
+            collection.forEach(function (value, index) { return results.push(callback(value, index)); });
+        }
+        else {
+            Object.keys(collection).forEach(function (key) { return results.push(callback(collection[key], key, collection)); });
+        }
+        return results;
+    }
+    Utils.select = select;
+    function split(value, separator) {
+        if (separator === void 0) { separator = ","; }
+        var parts = value.split(separator);
         var results = [];
         parts.forEach(function (part) {
             var cleaned = part.trim();
