@@ -12,6 +12,24 @@ import {RouteAuth} from "../RouteAuth";
 import {RouteInfo} from "../RouteInfo";
 import {RouteMethod} from "../RouteMethod";
 
+class BridgeInfo {
+  private _id: string;
+  private _internalipaddress: string;
+
+  constructor(info: { id: string, internalipaddress: string }) {
+    this._id = info.id;
+    this._internalipaddress = info.internalipaddress;
+  }
+
+  public get id(): string {
+    return this._id;
+  }
+
+  public get internalipaddress(): string {
+    return this._internalipaddress;
+  }
+}
+
 export class HueBridgeBuilder extends RestServiceBuilder {
   private static nupnp: string = "https://www.meethue.com/api/nupnp";
 
@@ -24,8 +42,10 @@ export class HueBridgeBuilder extends RestServiceBuilder {
       bridges: []
     };
 
-    return this.getBridgeInfo().then(response => {
-      let bridges: { id: string, internalipaddress: string }[] = response;
+    return this.retrieveBridgeInfo().then(response => {
+      let bridges: BridgeInfo[] = [];
+      response.forEach(x => bridges.push(new BridgeInfo(x)));
+
       bridges.forEach(bridge => {
         api.bridges.push(bridge);
         api[bridge.id] = {};
@@ -65,10 +85,10 @@ export class HueBridgeBuilder extends RestServiceBuilder {
     this.route(api, new Route(set_light_state));
   }
 
-  private getBridgeInfo(): Promise<{ id: string, internalipaddress: string }[]> {
+  private retrieveBridgeInfo(): Promise<BridgeInfo[]> {
     let request = superagent(HueBridgeBuilder.nupnp);
 
-    return new Promise<{ id: string, internalipaddress: string }[]>((resolve, reject) => {
+    return new Promise<BridgeInfo[]>((resolve, reject) => {
       return request.end((error, response) => {
         if (error) {
           reject(error);
