@@ -3,7 +3,7 @@
 import {} from "bluebird";
 import cheerio = require("cheerio");
 import superagent = require("superagent");
-import {SuperAgentRequest, Request, Response} from "superagent";
+import {Response} from "superagent";
 import urijs = require("urijs");
 
 import {RestServiceBuilder} from "../RestServiceBuilder";

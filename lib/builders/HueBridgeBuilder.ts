@@ -2,7 +2,7 @@
 
 import {} from "bluebird";
 import superagent = require("superagent");
-import {SuperAgentRequest, Request, Response} from "superagent";
+import {Response} from "superagent";
 import {} from "urijs";
 
 import {RestServiceBuilder} from "../RestServiceBuilder";
