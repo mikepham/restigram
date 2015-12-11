@@ -1,8 +1,19 @@
 {
   "name": "restigram",
-  "author": "NativeCode Development",
+  "author": "NativeCode Development <support@nativecode.com> (https://nativecode.com)",
+  "bugs": {
+    "url": "https://github.com/mikepham/restigram/issues"
+  },
   "description": "REST client framework",
-  "license": "ISC",
+  "homepage": "http://restigram.com",
+  "license": "SEE FILE IN LICENSE",
+  "publishConfig": {
+    "registry": "http://build.nativecode.com:4873/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikepham/restigram.git"
+  },
   "version": "1.0.0",
   "dependencies": {
     "bluebird": "^3.0.6",
