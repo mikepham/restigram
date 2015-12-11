@@ -55,6 +55,18 @@ export module Utils {
     });
   }
 
+  export function select<T>(collection: Object, callback: (value: any, key: string, collection: any) => T);
+  export function select<T>(collection: any[], callback: (item: any, index: number) => T)
+  export function select<T>(collection: any, callback: any) {
+    let results: T[] = [];
+    if (collection instanceof Array) {
+      collection.forEach((value, index) => results.push(callback(value, index)));
+    } else {
+      Object.keys(collection).forEach(key => results.push(callback(collection[key], key, collection)));
+    }
+    return results;
+  }
+
   export function split(value: string, separator: string = ","): string[] {
     let parts: string[] = value.split(separator);
     let results: string[] = [];

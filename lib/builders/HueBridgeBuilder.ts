@@ -42,19 +42,24 @@ export class HueBridgeBuilder extends RestServiceBuilder {
       bridges: []
     };
 
-    return this.retrieveBridgeInfo().then(response => {
-      let bridges: BridgeInfo[] = [];
-      response.forEach(x => bridges.push(new BridgeInfo(x)));
+    return this.retrieveBridgeInfo()
+      .then(response => {
+        let bridges: BridgeInfo[] = [];
+        response.forEach(x => bridges.push(new BridgeInfo(x)));
 
-      bridges.forEach(bridge => {
-        api.bridges.push(bridge);
-        api[bridge.id] = {};
-        let address: string = "http://" + bridge.internalipaddress;
-        this.buildBridgeCalls(address, api[bridge.id]);
+        bridges.forEach(bridge => {
+          api.bridges.push(bridge);
+          api[bridge.id] = {};
+          let address: string = "http://" + bridge.internalipaddress;
+          this.buildBridgeCalls(address, api[bridge.id]);
+        });
+
+        return api;
+      })
+      .catch(error => {
+        console.error(error);
+        console.trace();
       });
-
-      return api;
-    });
   }
 
   private buildBridgeCalls(url: string, api: any): void {

@@ -131,6 +131,30 @@ describe("When using the Utils module...", () => {
 
   });
 
+  describe("select", () => {
+
+    let collection: Object = { first: { name: "first" }, second: { name: "second" }, third: { name: "third" }, fourth: { name: "fourth" }, fifth: { name: "fifth" } };
+    let collection_array: Object[] = [{ key: "first" }, { key: "second" }, { key: "third" }, { key: "fourth" }, { key: "fifth" }];
+    let collection_object: Object = { first: "first", second: "second", third: "third", fourth: "fourth", fifth: "fifth" };
+    let expected = ["first", "second", "third", "fourth", "fifth"];
+
+    it("should select string values from array", () => {
+      let actual: string[] = Utils.select<string>(collection_array, item => item["key"]);
+      expect(actual).deep.equal(expected);
+    });
+
+    it("should select string values from object", () => {
+      let actual: string[] = Utils.select<string>(collection_object, (item, key, collection) => collection[key]);
+      expect(actual).deep.equal(expected);
+    });
+
+    it("should select object path", () => {
+      let actual: string[] = Utils.select<string>(collection, (item, key) => item.name);
+      expect(actual).deep.equal(expected);
+    });
+
+  });
+
   describe("variables,", () => {
 
     let format: { start: string, end: string } = { start: "{:", end: "}" };
