@@ -15,8 +15,10 @@ export class RestService {
     this._builder = builder;
     this._name = name;
     this._url = url;
+  }
 
-    this.generate();
+  public get api(): any {
+    return this._api;
   }
 
   public get builder(): RestServiceBuilder {
@@ -31,14 +33,13 @@ export class RestService {
     return this._url;
   }
 
-  public refresh(): void {
-    this.generate();
+  public refresh(): Promise<any> {
+    return this.generate();
   }
 
   protected generate(): Promise<any> {
     return this._builder.build(this.url).then(api => {
-      this._api = api;
-      return this._api;
+      return this._api = api;
     });
   }
 }

@@ -1,12 +1,10 @@
 @ECHO OFF
 
-call npm run build
-
-ECHO "Runnning tests..."
-call npm run test
+ECHO "Bumping version..."
+call npm version patch
 
 ECHO "Pushing to Git..."
-REM call git push
+call git push
 
 ECHO "Pushing package..."
-REM call npm run publish
+call npm run publish
